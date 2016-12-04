@@ -1,0 +1,15 @@
+{
+  "lang": "zh",
+  "name": "您的手機急救指引",
+  "short_name": "您的手機急救指引",
+  "icons": [{
+    "src": "img/apple-touch-icon.png",
+    "sizes": "45x45"
+  },{
+    "src": "img/android-icon.png",
+    "sizes": "192x192"
+  }],
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#acffdd"
+}

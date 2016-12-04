@@ -1,0 +1,15 @@
+{
+  "lang": "it",
+  "name": "Primo Soccorso",
+  "short_name": "Primo Soccorso",
+  "icons": [{
+    "src": "img/apple-touch-icon.png",
+    "sizes": "45x45"
+  },{
+    "src": "img/android-icon.png",
+    "sizes": "192x192"
+  }],
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#acffdd"
+}
