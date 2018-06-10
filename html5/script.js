@@ -3,7 +3,18 @@ var imageURLs = {};
 
 function showMainMenu() {
 	if (document.getElementById("imgholder")) {
-		document.body.innerHTML="<h1></h1><div id=\"imgholder\" style=\"display:none\">" + document.getElementById("imgholder").innerHTML + "</div><ul></ul>";
+		document.body.innerHTML="<h1></h1><div id=\"imgholder\" style=\"display:none\">" + document.getElementById("imgholder").innerHTML + "</div><div></div><ul></ul>";
+		if (navigator.storage && navigator.storage.persist) {
+			var persistHolder = document.body.lastChild.previousSibling;
+			navigator.storage.persisted().then(function(persistent) {
+				var label = document.createElement("label");
+				if (persistent)
+					label.innerHTML = "<input type=\"checkbox\" checked disabled> Persist storage"
+				else
+					label.innerHTML = "<input type=\"checkbox\" onclick=\"doPersist(this);\"> Persist storage"
+				persistHolder.appendChild(label);
+			});
+		}
 	} else {
 		document.body.innerHTML="<h1></h1><ul></ul>";
 	}
@@ -19,6 +30,24 @@ function showMainMenu() {
 		liElem.appendChild(aElem);
 		document.body.lastChild.appendChild(liElem);
 	}
+}
+
+function doPersist(e) {
+	navigator.storage.persist().then(function(persistent) {
+		if (persistent) {
+			e.disabled = true;
+		} else {
+			alert("Permission denied. Did you add to homescreen, add bookmark, and allow push notifications?");
+			e.checked = false;
+			if (Notification && Notification.requestPermission) {
+				Notification.requestPermission(function(status) {
+					if (status == 'granted') {
+						alert("Now try again.");
+					}
+				});
+			}
+		}
+	});
 }
 
 function createImage(id) {
